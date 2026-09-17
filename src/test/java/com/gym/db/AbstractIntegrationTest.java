@@ -1,4 +1,4 @@
-package com.gym;
+package com.gym.db;
 
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
