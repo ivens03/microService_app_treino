@@ -10,10 +10,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +26,8 @@ import java.util.UUID;
 @Table(schema = "treino", name = "ficha")
 @Schema(description = "Dentro de schema: **treino**. Armazenamos a ficha do usuario.")
 @Tag(name = "treino")
+@Getter
+@Setter
 public class Ficha implements Serializable {
 
     @Id
@@ -39,5 +44,5 @@ public class Ficha implements Serializable {
     Date dataTroca;
 
     @OneToMany(mappedBy = "ficha", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Exercicio> exercicios;
+    List<Exercicio> exercicios = new ArrayList<>();
 }

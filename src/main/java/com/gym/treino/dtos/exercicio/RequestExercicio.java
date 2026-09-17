@@ -1,5 +1,6 @@
-package com.gym.treino.dtos;
+package com.gym.treino.dtos.exercicio;
 
+import com.gym.treino.dtos.serie.RequestSerie;
 import com.gym.treino.model.TecnicaAvancada;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

@@ -13,13 +13,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(schema = "treino", name = "exercicio")
+@Getter
+@Setter
 public class Exercicio implements Serializable {
 
     @Id
@@ -38,5 +43,5 @@ public class Exercicio implements Serializable {
     TecnicaAvancada tecnicaAvancada;
 
     @OneToMany(mappedBy = "exercicio", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Serie> series;
+    List<Serie> series = new ArrayList<>();
 }

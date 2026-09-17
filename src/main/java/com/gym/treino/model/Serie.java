@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,6 +19,8 @@ import java.util.UUID;
 
 @Entity
 @Table(schema = "treino", name = "serie")
+@Getter
+@Setter
 public class Serie implements Serializable {
 
     @Id

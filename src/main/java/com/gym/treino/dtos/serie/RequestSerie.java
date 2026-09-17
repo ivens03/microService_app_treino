@@ -1,4 +1,4 @@
-package com.gym.treino.dtos;
+package com.gym.treino.dtos.serie;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;

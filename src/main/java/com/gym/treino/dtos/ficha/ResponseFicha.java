@@ -1,4 +1,6 @@
-package com.gym.treino.dtos;
+package com.gym.treino.dtos.ficha;
+
+import com.gym.treino.dtos.exercicio.ResponseExercicio;
 
 import java.util.Date;
 import java.util.List;

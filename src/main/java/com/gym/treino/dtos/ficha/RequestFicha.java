@@ -1,5 +1,6 @@
-package com.gym.treino.dtos;
+package com.gym.treino.dtos.ficha;
 
+import com.gym.treino.dtos.exercicio.RequestExercicio;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
