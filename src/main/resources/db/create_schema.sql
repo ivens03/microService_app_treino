@@ -11,29 +11,41 @@ CREATE TABLE IF NOT EXISTS treino.ficha (
 );
 
 -- =========================
+-- treino.grupo_muscular
+-- =========================
+CREATE TABLE IF NOT EXISTS treino.grupo_muscular (
+    id               BIGSERIAL PRIMARY KEY,
+    musculo_afetado  VARCHAR(255)
+);
+
+-- =========================
 -- treino.exercicio
 -- =========================
 CREATE TABLE IF NOT EXISTS treino.exercicio (
-    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id                BIGSERIAL PRIMARY KEY,
     nome_exercicio    VARCHAR(255),
-    ficha_id          UUID,
-    tecnica_avancada  VARCHAR(30),
-    CONSTRAINT fk_exercicio_ficha
+    imagem_exercicio  VARCHAR(255)
+);
+
+-- =========================
+-- treino.ficha_exercicio
+-- =========================
+CREATE TABLE IF NOT EXISTS treino.ficha_exercicio (
+    id            BIGSERIAL PRIMARY KEY,
+    ficha_id      UUID,
+    exercicio_id  BIGINT,
+    CONSTRAINT fk_ficha_exercicio_ficha
         FOREIGN KEY (ficha_id)
         REFERENCES treino.ficha (id)
         ON DELETE CASCADE,
-    CONSTRAINT ck_exercicio_tecnica_avancada
-        CHECK (tecnica_avancada IN (
-            'NORMAL',
-            'DROP_SET',
-            'REST_PAUSE',
-            'PONTO_ZERO',
-            'PIRAMIDE_CRESCENTE',
-            'PIRAMIDE_DECRESCENTE'
-        ))
+    CONSTRAINT fk_ficha_exercicio_exercicio
+        FOREIGN KEY (exercicio_id)
+        REFERENCES treino.exercicio (id)
+        ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_exercicio_ficha_id ON treino.exercicio (ficha_id);
+CREATE INDEX IF NOT EXISTS idx_ficha_exercicio_ficha_id ON treino.ficha_exercicio (ficha_id);
+CREATE INDEX IF NOT EXISTS idx_ficha_exercicio_exercicio_id ON treino.ficha_exercicio (exercicio_id);
 
 -- =========================
 -- treino.serie
@@ -44,7 +56,7 @@ CREATE TABLE IF NOT EXISTS treino.serie (
     numero_repeticoes  SMALLINT,
     carga_exercicio    NUMERIC(6,2),
     tempo_descanso     TIME,
-    exercicio_id       UUID,
+    exercicio_id       BIGINT,
     CONSTRAINT fk_serie_exercicio
         FOREIGN KEY (exercicio_id)
         REFERENCES treino.exercicio (id)

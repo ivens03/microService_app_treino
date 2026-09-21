@@ -44,5 +44,5 @@ public class Ficha implements Serializable {
     Date dataTroca;
 
     @OneToMany(mappedBy = "ficha", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Exercicio> exercicios = new ArrayList<>();
+    List<FichaExercicio> exercicios = new ArrayList<>();
 }
