@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -63,5 +64,27 @@ class ExercicioControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void deveRetornar400ComDetalheDoCampoQuandoNomeExercicioEstiverAusente() throws Exception {
+        String jsonSemNomeExercicio = """
+                {
+                    "tecnicaAvancada": "NORMAL",
+                    "series": [
+                        { "numeroSerie": 1, "numeroRepeticoes": 10, "cargaExercicio": 40.0, "tempoDescanso": "00:01:30" }
+                    ]
+                }
+                """;
+
+        mvc.perform(post("/api/exercicios")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonSemNomeExercicio))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.path").value("/api/exercicios"))
+                .andExpect(jsonPath("$.timestamp").value(matchesPattern("\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}")))
+                .andExpect(jsonPath("$.campos[0].campo").value("nomeExercicio"))
+                .andExpect(jsonPath("$.campos[0].mensagem").value("nome do exercício é obrigatório"));
     }
 }
