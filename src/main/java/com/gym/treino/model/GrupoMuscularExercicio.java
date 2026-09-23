@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class GrupoMuscularExercicio implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Column(name = "musculo_afetado")

@@ -22,7 +22,7 @@ import java.util.List;
 public class Exercicio implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Column(name = "nome_exercicio")
