@@ -21,7 +21,7 @@ public class GrupoMuscularExercicio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "musculo_afetado")
-    String musculoAfetado;
+    @Column(name = "grupo_musculo")
+    String grupoMusculo;
 
 }
